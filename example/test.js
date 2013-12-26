@@ -17,7 +17,7 @@ test('boop exterminate', function (t) {
     t.plan(20);
     var i = 0, n = 0;
     var iv = setInterval(function () {
-        if (i % 7 === 0) {
+        if ((i + 2) % 8 === 0) {
             t.equal(i, n + 6, getMessage())
         }
         else t.equal(i, n, getMessage());
