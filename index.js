@@ -65,9 +65,14 @@ module.exports = function (opts) {
         }
         out.push('\x1b[1G');
         out.push(null);
+        
+        dup.emit('results', res);
+        if (!res.ok) dup.emit('fail');
+        dup.exitCode = res.ok ? 0 : 1;
     });
     
-    return duplexer(tap, out);
+    var dup = duplexer(tap, out);
+    return dup;
     
     function showTest (test) {
         out.push('\r');
