@@ -15,9 +15,6 @@
     "minimist": "0.0.5",
     "defined": "0.0.0"
   },
-  "scripts": {
-    "test": "tape test/*.js"
-  },
   "repository": {
     "type": "git",
     "url": "git://github.com/substack/faucet.git"
