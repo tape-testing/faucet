@@ -119,4 +119,19 @@ package.json with object browser field as main
 # fail 0
 ```
 
-Once you've 
+Once you've got a way to get TAP out of your tests, just pipe into `faucet`:
+
+![mocha pipe](images/mocha.gif)
+
+# usage
+
+```
+usage:
+  faucet [FILES]
+  command | faucet
+
+```
+
+# license
+
+MIT
