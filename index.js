@@ -8,7 +8,7 @@ module.exports = function (opts) {
     if (!opts) opts = {};
     var tap = parser();
     var out = through2();
-    var test;
+    var test, lastAssert;
     
     var replaceLine = (function () {
         var prevWidth = 0;
@@ -56,6 +56,15 @@ module.exports = function (opts) {
         test.assertions.push(res);
     });
     
+    tap.on('extra', function (extra) {
+        var last = test.assertions[test.assertions.length-1];
+        if (last && !last.ok) {
+            out.push(extra.split('\n').map(function (line) {
+                return '  ' + line;
+            }).join('\n') + '\n');
+        }
+    });
+    
     tap.on('results', function (res) {
         if (!test.ok || /^fail\s+\d+$/.test(test.name)) {
             out.push(updateName(test.offset + 1, '⨯ ' + test.name, 31));
@@ -63,7 +72,6 @@ module.exports = function (opts) {
         else {
             out.push(updateName(test.offset + 1, '✓ ' + test.name, 32));
         }
-        out.push('\x1b[1G');
         out.push(null);
         
         dup.emit('results', res);
@@ -84,6 +92,6 @@ function updateName (y, str, c) {
         + '\x1b[1m\x1b[' + c + 'm'
         + str
         + '\x1b[0m'
-        + '\x1b[' + y + 'B'
+        + '\x1b[' + y + 'B\x1b[1G'
     ;
 }
