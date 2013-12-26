@@ -9,7 +9,8 @@
   "dependencies": {
     "through2": "~0.2.3",
     "tap-parser": "~0.3.0",
-    "duplexer": "~0.1.1"
+    "duplexer": "~0.1.1",
+    "strip-ansi": "~0.1.1"
   },
   "devDependencies": {
     "tape": "~2.3.2"
