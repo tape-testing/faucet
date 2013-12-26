@@ -10,7 +10,11 @@ module.exports = function (opts) {
     var test, lastAssert;
     
     tap.on('comment', function (comment) {
-        if (test && test.ok) {
+        if (test && test.ok && test.assertions.length === 0
+        && /^(tests|pass)\s+\d+$/.test(test.name)) {
+            out.push('\r' + test.name);
+        }
+        else if (test && test.ok) {
             var s = updateName(test.offset + 1, '✓ ' + test.name, 32);
             out.push('\r' + s);
         }
@@ -67,7 +71,7 @@ module.exports = function (opts) {
             ));
         });
         
-        if (!/^fail\s+\d+$/.test(test && test.name)) {
+        if (!res.ok && !/^fail\s+\d+$/.test(test && test.name)) {
             out.push(sprintf(
                 '\r\x1b[1m\x1b[31m⨯ fail  %s\x1b[0m\x1b[K\n',
                 (res.errors.length + res.fail.length) || ''
