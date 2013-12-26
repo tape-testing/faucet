@@ -31,6 +31,19 @@ module.exports = function (opts) {
     tap.on('assert', function (res) {
         var ok = res.ok ? 'ok' : 'not ok';
         var c = res.ok ? 32 : 31;
+        if (!test) {
+            // mocha produces TAP results this way, whatever
+            var s = res.name.trim();
+            if (opts.width && s.length > opts.width - 2) {
+                s = s.slice(0, opts.width - 5) + '...';
+            }
+            out.push(sprintf(
+                '\x1b[1m\x1b[' + c + 'm%s %s\x1b[0m\n',
+                res.ok ? '✓' : '⨯', s
+            ));
+            return;
+        }
+        
         var fmt = '\r  %s \x1b[1m\x1b[' + c + 'm%d\x1b[0m %s\x1b[K';
         var str = sprintf(fmt, ok, res.number, res.name);
         

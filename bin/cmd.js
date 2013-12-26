@@ -1,14 +1,19 @@
 #!/usr/bin/env node
 var faucet = require('../');
 var minimist = require('minimist');
+var defined = require('defined');
 var tapeCmd = require.resolve('tape/bin/tape');
 
 var spawn = require('child_process').spawn;
 var fs = require('fs');
 var path = require('path');
 
+var argv = minimist(process.argv.slice(2));
 var tap = faucet({
-    width: process.stdout.isTTY ? process.stdout.columns : 0
+    width: defined(argv.w, argv.width, process.stdout.isTTY
+        ? process.stdout.columns - 5
+        : 0
+    )
 });
 process.on('exit', function (code) {
     if (code === 0 && tap.exitCode !== 0) {
@@ -16,7 +21,6 @@ process.on('exit', function (code) {
     }
 });
 
-var argv = minimist(process.argv.slice(2));
 if (!process.stdin.isTTY || argv._[0] === '-') {
     process.stdin.pipe(tap).pipe(process.stdout);
     return;
