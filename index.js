@@ -59,14 +59,13 @@ module.exports = function (opts) {
         else if (test && test.ok) {
             out.push(updateName(test.offset + 1, '✓ ' + test.name, 32));
         }
-        else if (!res.ok) {
-            res.errors.forEach(function (err, ix) {
-                out.push(sprintf(
-                    'not ok \x1b[1m\x1b[31m%d\x1b[0m %s\n',
-                    ix + 1, err.message
-                ));
-            });
-        }
+        
+        res.errors.forEach(function (err, ix) {
+            out.push(sprintf(
+                'not ok \x1b[1m\x1b[31m%d\x1b[0m %s\n',
+                ix + 1 + res.asserts.length, err.message
+            ));
+        });
         
         if (!/^fail\s+\d+$/.test(test && test.name)) {
             out.push(sprintf(
@@ -92,6 +91,7 @@ module.exports = function (opts) {
 
 function updateName (y, str, c) {
     return '\x1b[' + y + 'A'
+        + '\x1b[1G'
         + '\x1b[1m\x1b[' + c + 'm'
         + str
         + '\x1b[0m'
