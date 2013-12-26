@@ -57,8 +57,9 @@ module.exports = function (opts) {
     });
     
     tap.on('extra', function (extra) {
+        if (!test || test.assertions.length === 0) return;
         var last = test.assertions[test.assertions.length-1];
-        if (last && !last.ok) {
+        if (!last.ok) {
             out.push(extra.split('\n').map(function (line) {
                 return '  ' + line;
             }).join('\n') + '\n');
@@ -66,10 +67,10 @@ module.exports = function (opts) {
     });
     
     tap.on('results', function (res) {
-        if (!test.ok || /^fail\s+\d+$/.test(test.name)) {
+        if (test && (!test.ok || /^fail\s+\d+$/.test(test.name))) {
             out.push(updateName(test.offset + 1, '⨯ ' + test.name, 31));
         }
-        else {
+        else if (test) {
             out.push(updateName(test.offset + 1, '✓ ' + test.name, 32));
         }
         out.push(null);
