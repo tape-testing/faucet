@@ -23,12 +23,13 @@ module.exports = function (opts) {
     
     tap.on('comment', function (comment) {
         test = { name: comment, assertions: [] };
-        out.push(replaceLine(comment) + '\n');
+        out.push(replaceLine('# ' + comment) + '\n');
     });
     
     tap.on('assert', function (res) {
         var ok = res.ok ? '  ok' : '  not ok';
-        var fmt = '%s %3d %s';
+        var fmt = '%s %2d %s';
+        if (!res.ok) fmt += '\n';
         var str = sprintf(fmt, ok, res.number, res.name);
         out.push(replaceLine(str));
         test.assertions.push(res);

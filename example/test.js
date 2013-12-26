@@ -4,7 +4,7 @@ function getMessage () {
     return msgs[Math.floor(Math.random() * msgs.length)];
 }
 
-test('beep', function (t) {
+test('beep affirmative', function (t) {
     t.plan(24);
     var i = 0, n = 0;
     var iv = setInterval(function () {
@@ -13,11 +13,15 @@ test('beep', function (t) {
     }, 50);
 });
 
-test('boop', function (t) {
+test('boop exterminate', function (t) {
     t.plan(20);
     var i = 0, n = 0;
     var iv = setInterval(function () {
-        t.equal(i++, n++, getMessage());
+        if (i % 7 === 0) {
+            t.equal(i, n + 6, getMessage())
+        }
+        else t.equal(i, n, getMessage());
+        i++; n++;
         if (i === 20) clearInterval(iv);
     }, 100);
 });
