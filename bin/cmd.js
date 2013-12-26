@@ -1,3 +1,6 @@
 #!/usr/bin/env node
 var faucet = require('../');
-process.stdin.pipe(faucet()).pipe(process.stdout);
+var opts = {
+    width: process.stdout.isTTY ? process.stdout.columns : 0
+};
+process.stdin.pipe(faucet(opts)).pipe(process.stdout);
