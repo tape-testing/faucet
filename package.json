@@ -1,0 +1,39 @@
+{
+  "name": "faucet",
+  "version": "0.0.0",
+  "description": "human-readable TAP summarizer",
+  "main": "index.js",
+  "bin": {
+    "faucet": "bin/cmd.js"
+  },
+  "dependencies": {
+    "through2": "~0.2.3",
+    "tap-parser": "~0.3.0",
+    "duplexer": "~0.1.1"
+  },
+  "devDependencies": {
+    "tape": "~2.3.2"
+  },
+  "scripts": {
+    "test": "tape test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/substack/faucet.git"
+  },
+  "homepage": "https://github.com/substack/faucet",
+  "keywords": [
+    "tap",
+    "human",
+    "test",
+    "anything",
+    "protocol",
+    "pretty"
+  ],
+  "author": {
+    "name": "James Halliday",
+    "email": "mail@substack.net",
+    "url": "http://substack.net"
+  },
+  "license": "MIT"
+}
