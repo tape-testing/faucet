@@ -10,7 +10,6 @@
     "through2": "~0.2.3",
     "tap-parser": "~0.4.0",
     "duplexer": "~0.1.1",
-    "strip-ansi": "~0.1.1",
     "sprintf": "~0.1.3"
   },
   "devDependencies": {

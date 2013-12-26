@@ -2,26 +2,12 @@ var through2 = require('through2');
 var duplexer = require('duplexer');
 var parser = require('tap-parser');
 var sprintf = require('sprintf');
-var strip = require('strip-ansi');
 
 module.exports = function (opts) {
     if (!opts) opts = {};
     var tap = parser();
     var out = through2();
     var test, lastAssert;
-    
-    var replaceLine = (function () {
-        var prevWidth = 0;
-        return function (str) {
-            if (opts.width) str = str.slice(0, opts.width);
-            var len = strip(str).length;
-            var n = prevWidth - len;
-            if (n < 0) n = 0;
-            var s = str + Array(n + 1).join(' ');
-            prevWidth = len;
-            return '\r' + s;
-        };
-    })();
     
     tap.on('comment', function (comment) {
         if (test && test.ok) {
@@ -35,14 +21,14 @@ module.exports = function (opts) {
             offset: 0,
             ok: true
         };
-        out.push(replaceLine('# ' + comment) + '\n');
+        out.push('\r# ' + comment + '\x1b[K\n');
     });
     
     tap.on('assert', function (res) {
         var ok = res.ok ? 'ok' : 'not ok';
         var c = res.ok ? 32 : 31;
-        var fmt = '  %s \x1b[1m\x1b[' + c + 'm%d\x1b[0m %s';
-        var str = replaceLine(sprintf(fmt, ok, res.number, res.name));
+        var fmt = '\r  %s \x1b[1m\x1b[' + c + 'm%d\x1b[0m %s\x1b[K';
+        var str = sprintf(fmt, ok, res.number, res.name);
         
         if (!res.ok) {
             var y = (++ test.offset) + 1;
