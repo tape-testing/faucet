@@ -57,10 +57,14 @@ module.exports = function (opts) {
     });
     
     tap.on('results', function (res) {
-        if (/^fail\s/.test(test.name)) {
-            
-            console.log(test.name);
+        if (!test.ok || /^fail\s+\d+$/.test(test.name)) {
+            out.push(updateName(test.offset + 1, '⨯ ' + test.name, 31));
         }
+        else {
+            out.push(updateName(test.offset + 1, '✓ ' + test.name, 32));
+        }
+        out.push('\x1b[1G');
+        out.push(null);
     });
     
     return duplexer(tap, out);
