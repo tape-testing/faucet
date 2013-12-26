@@ -22,6 +22,17 @@ module.exports = function (opts) {
     })();
     
     tap.on('comment', function (comment) {
+        if (test && test.ok) {
+            var y = test.offset + 1;
+            out.push(
+                '\r\x1b[' + y + 'A'
+                + '\x1b[1m\x1b[32m'
+                + '✓ ' + test.name
+                + '\x1b[0m'
+                + '\x1b[' + y + 'B'
+            );
+        }
+        
         test = {
             name: comment,
             assertions: [],
@@ -34,17 +45,22 @@ module.exports = function (opts) {
     tap.on('assert', function (res) {
         var ok = res.ok ? 'ok' : 'not ok';
         var fmt = '%4d.  %s  %s';
+        var str = replaceLine(sprintf(fmt, res.number, ok, res.name));
         
         if (!res.ok) {
             var y = (++ test.offset) + 1;
-            fmt += '\n';
+            str += '\n';
             if (test.ok) {
-                fmt += '\x1b[' + y + 'Ax\x1b[' + y + 'B';
+                str += '\x1b[' + y + 'A'
+                    + '\x1b[1m\x1b[31m'
+                    + '⨯ ' + test.name
+                    + '\x1b[0m'
+                    + '\x1b[' + y + 'B'
+                ;
             }
             test.ok = false;
         }
-        var str = sprintf(fmt, res.number, ok, res.name);
-        out.push(replaceLine(str));
+        out.push(str);
         test.assertions.push(res);
     });
     
