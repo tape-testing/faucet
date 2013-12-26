@@ -67,12 +67,28 @@ module.exports = function (opts) {
     });
     
     tap.on('results', function (res) {
-        if (test && (!test.ok || /^fail\s+\d+$/.test(test.name))) {
+        if (test && /^fail\s+\d+$/.test(test.name)) {
             out.push(updateName(test.offset + 1, '⨯ ' + test.name, 31));
         }
-        else if (test) {
+        else if (test && test.ok) {
             out.push(updateName(test.offset + 1, '✓ ' + test.name, 32));
         }
+        else if (!res.ok) {
+            res.errors.forEach(function (err, ix) {
+                out.push(sprintf(
+                    'not ok \x1b[1m\x1b[31m%d\x1b[0m %s\n',
+                    ix + 1, err.message
+                ));
+            });
+        }
+        
+        if (!/^fail\s+\d+$/.test(test && test.name)) {
+            out.push(sprintf(
+                '\r\x1b[1m\x1b[31m⨯ fail  %s\x1b[0m\x1b[K\n',
+                (res.errors.length + res.fail.length) || ''
+            ));
+        }
+        
         out.push(null);
         
         dup.emit('results', res);
