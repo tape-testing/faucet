@@ -14,7 +14,7 @@ module.exports = function (opts) {
         
         if (test && test.ok && test.assertions.length === 0
         && /^(tests|pass)\s+\d+$/.test(test.name)) {
-            out.push('\r' + test.name);
+            out.push('\r' + trim(test.name));
         }
         else if (test && test.ok) {
             var s = updateName(test.offset + 1, '✓ ' + test.name, 32);
@@ -27,7 +27,7 @@ module.exports = function (opts) {
             offset: 0,
             ok: true
         };
-        out.push('\r# ' + comment + '\x1b[K\n');
+        out.push('\r' + trim('# ' + comment) + '\x1b[K\n');
     });
     
     tap.on('assert', function (res) {
@@ -35,13 +35,10 @@ module.exports = function (opts) {
         var c = res.ok ? 32 : 31;
         if (!test) {
             // mocha produces TAP results this way, whatever
-            var s = res.name.trim();
-            if (opts.width && s.length > opts.width - 2) {
-                s = s.slice(0, opts.width - 5) + '...';
-            }
+            var s = trim(res.name.trim());
             out.push(sprintf(
-                '\x1b[1m\x1b[' + c + 'm%s %s\x1b[0m\n',
-                res.ok ? '✓' : '⨯', s
+                '\x1b[1m\x1b[' + c + 'm%s\x1b[0m\n',
+                trim((res.ok ? '✓' : '⨯') + ' ' +  s)
             ));
             return;
         }
@@ -106,14 +103,21 @@ module.exports = function (opts) {
     function showTest (test) {
         out.push('\r');
     }
+    
+    function trim (s) {
+        if (opts.width && s.length > opts.width - 2) {
+            s = s.slice(0, opts.width - 5) + '...';
+        }
+        return s;
+    }
+    
+    function updateName (y, str, c) {
+        return '\x1b[' + y + 'A'
+            + '\x1b[1G'
+            + '\x1b[1m\x1b[' + c + 'm'
+            + trim(str)
+            + '\x1b[0m'
+            + '\x1b[' + y + 'B\x1b[1G'
+        ;
+    }
 };
-
-function updateName (y, str, c) {
-    return '\x1b[' + y + 'A'
-        + '\x1b[1G'
-        + '\x1b[1m\x1b[' + c + 'm'
-        + str
-        + '\x1b[0m'
-        + '\x1b[' + y + 'B\x1b[1G'
-    ;
-}
