@@ -6,5 +6,7 @@ human-readable TAP summarizer
 
 pipe TAP text into the `faucet` command, get back pretty results:
 
-![test.gif](images/test.gif)
+![test](images/test.gif)
+
+![falafel](images/falafel.gif)
 
