@@ -22,6 +22,14 @@ using the `tape` command internally:
 
 ![implicit test/ directory](images/dnode.gif)
 
+# install
+
+To get the `faucet` command, with [npm](https://npmjs.org) do:
+
+```
+npm install -g faucet
+```
+
 # generating TAP
 
 The great thing about TAP is that it's inherently serializable on stdout, so you
