@@ -10,6 +10,8 @@ module.exports = function (opts) {
     var test, lastAssert;
     
     tap.on('comment', function (comment) {
+        if (comment === 'fail 0') return; // a mocha thing
+        
         if (test && test.ok && test.assertions.length === 0
         && /^(tests|pass)\s+\d+$/.test(test.name)) {
             out.push('\r' + test.name);
