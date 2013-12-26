@@ -22,15 +22,28 @@ module.exports = function (opts) {
     })();
     
     tap.on('comment', function (comment) {
-        test = { name: comment, assertions: [] };
+        test = {
+            name: comment,
+            assertions: [],
+            offset: 0,
+            ok: true
+        };
         out.push(replaceLine('# ' + comment) + '\n');
     });
     
     tap.on('assert', function (res) {
-        var ok = res.ok ? '  ok' : '  not ok';
-        var fmt = '%s %2d %s';
-        if (!res.ok) fmt += '\n';
-        var str = sprintf(fmt, ok, res.number, res.name);
+        var ok = res.ok ? 'ok' : 'not ok';
+        var fmt = '%4d.  %s  %s';
+        
+        if (!res.ok) {
+            var y = (++ test.offset) + 1;
+            fmt += '\n';
+            if (test.ok) {
+                fmt += '\x1b[' + y + 'Ax\x1b[' + y + 'B';
+            }
+            test.ok = false;
+        }
+        var str = sprintf(fmt, res.number, ok, res.name);
         out.push(replaceLine(str));
         test.assertions.push(res);
     });
