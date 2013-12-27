@@ -137,7 +137,6 @@ Once you've got a way to get TAP out of your tests, just pipe into `faucet`:
 usage:
   faucet [FILES]
   command | faucet
-
 ```
 
 # license
