@@ -20,6 +20,7 @@ process.on('exit', function (code) {
         process.exit(tap.exitCode);
     }
 });
+process.stdout.on('error', function () {});
 
 if (!process.stdin.isTTY || argv._[0] === '-') {
     process.stdin.pipe(tap).pipe(process.stdout);
