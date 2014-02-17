@@ -1,6 +1,6 @@
 {
   "name": "faucet",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "human-readable TAP summarizer",
   "main": "index.js",
   "bin": {
