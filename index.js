@@ -13,7 +13,7 @@ var split = require('string.prototype.split');
 var trim = require('string.prototype.trim');
 var regexTester = require('safe-regex-test');
 
-var isPassing = regexTester(/^(tests|pass)\s+\d+$/);
+var isPassing = regexTester(/^(assertions|tests|pass)\s+\d+$/);
 var isFailing = regexTester(/^fail\s+\d+$/);
 
 module.exports = function (opts) {

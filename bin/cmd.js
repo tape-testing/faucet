@@ -6,7 +6,8 @@ var faucet = require('../');
 var minimist = require('minimist');
 var defined = require('defined');
 var which = require('npm-which');
-var tapeCmd = which.sync('tape', { cwd: process.cwd() });
+
+var tapeCmd = process.env.FAUCET_TAP_CMD || which.sync('tape', { cwd: process.cwd() });
 
 var spawn = require('child_process').spawn;
 var fs = require('fs');
