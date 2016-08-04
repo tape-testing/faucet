@@ -16,11 +16,13 @@ var path = require('path');
 var regexTester = require('safe-regex-test');
 var jsFile = regexTester(/\.js$/i);
 
-var faucetArgs = process.argv.slice(2);
+var faucetArgs = [];
 var opts = [];
 faucetArgs.forEach(function (arg) {
-    if (arg[0] === '-') {
+    if (arg.length > 1 && arg.charAt(0) === '-') {
         opts.push(arg);
+    } else {
+        faucetArgs.push(arg);
     }
 });
 var argv = minimist(faucetArgs);
