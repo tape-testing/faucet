@@ -33,6 +33,7 @@ module.exports = function (opts) {
 	}
 
 	var test;
+    var bailout = null;
 
 	tap.on('comment', function (comment) {
 		if (comment === 'fail 0') { return; } // a mocha thing
@@ -87,6 +88,12 @@ module.exports = function (opts) {
 	});
 
 	tap.on('extra', function (extra) {
+        if (/^bail out!/i.test(extra)) {
+            // faucet is incompatible with tap-parser that supports bail out
+            bailout = extra;
+            return;
+        }
+
 		if (!test || test.assertions.length === 0) { return; }
 		var last = test.assertions[test.assertions.length - 1];
 		if (!last.ok) {
@@ -123,7 +130,10 @@ module.exports = function (opts) {
 				(res.errors.length + res.fail.length) || ''
 			));
 		}
-
+        
+        if (bailout !== null) {
+            out.push('\r\x1b[1m\x1b[31m- '+ bailout + '\x1b[0m\x1b[K\n');
+        }
 		out.push(null);
 
 		dup.emit('results', res);

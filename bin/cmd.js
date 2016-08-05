@@ -18,8 +18,8 @@ var jsFile = regexTester(/\.js$/i);
 
 var faucetArgs = [];
 var opts = [];
-faucetArgs.forEach(function (arg) {
-    if (arg.length > 1 && arg.charAt(0) === '-') {
+process.argv.slice(2).forEach(function(arg) {
+    if (arg !== '-' && arg[0] === '-') {
         opts.push(arg);
     } else {
         faucetArgs.push(arg);
