@@ -1,6 +1,6 @@
 # faucet
 
-human-readable TAP summarizer
+human-readable [TAP](https://testanything.org/) summarizer
 
 # example
 
