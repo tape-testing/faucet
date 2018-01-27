@@ -69,4 +69,5 @@ process.on('exit', function (code) {
     }
 });
 
-function jsFile (x) { return /\.js$/i.test(x) }
+function jsFile (x) { return /^[^\.]*\.js$/i.test(x) }
+
