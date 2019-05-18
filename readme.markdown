@@ -135,9 +135,10 @@ Once you've got a way to get TAP out of your tests, just pipe into `faucet`:
 
 ```
 usage:
-  faucet [FILES]
+  faucet [FILES] [--no-stack]
   command | faucet
 ```
+* the optional ```--no-stack``` argument will remove stack traces from failed test reports
 
 # license
 
