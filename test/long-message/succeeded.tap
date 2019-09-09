@@ -1,0 +1,13 @@
+TAP version 13
+# Exported dependency names can be resolved.
+ok 1 The dependency "csui" should be resolvable.
+ok 2 The dependency "esoc" should be resolvable.
+# Resolving an unknown dependency fails.
+ok 3 The message "Unrecognised dependency: "dummy"." should start with "Unrecognised dependency:".
+
+1..3
+# tests 3
+# pass  3
+
+# ok
+

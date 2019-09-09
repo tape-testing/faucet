@@ -16,9 +16,10 @@ module.exports = function (opts) {
 	var tap = parser();
 	var out = through2();
 
-	function trimWidth(s) {
+	function trimWidth(s, ok) {
 		if (opts && opts.width && s.length > opts.width - 2) {
-			return s.slice(0, opts.width - 5) + '...';
+			var more = ok ? 0 : 4;
+			return s.slice(0, opts.width - 5 - more) + '...';
 		}
 		return s;
 	}
@@ -61,13 +62,13 @@ module.exports = function (opts) {
 			var s = trimWidth(trim(res.name));
 			push(out, sprintf(
 				'\x1b[1m\x1b[' + c + 'm%s\x1b[0m\n',
-				trimWidth((res.ok ? '✓' : '⨯') + ' ' + s)
+				trimWidth((res.ok ? '✓' : '⨯') + ' ' + s, res.ok)
 			));
 			return;
 		}
 
 		var fmt = '\r  %s \x1b[1m\x1b[' + c + 'm%d\x1b[0m %s\x1b[K';
-		var str = sprintf(fmt, ok, res.number, res.name);
+		var str = sprintf(fmt, ok, res.number, trimWidth(res.name, res.ok));
 
 		if (!res.ok) {
 			var y = ++test.offset + 1;

@@ -1,0 +1,20 @@
+TAP version 13
+# Resolving an unknown dependency fails.
+not ok 1 The message "Unrecognised dependency: "dummy"." should start with "Unrecognised dependency:".
+  ---
+    operator: ok
+    expected: true
+    actual:   false
+    at: Test.<anonymous> (/Users/ferdipr/Sources.localized/smartui/gitlab/csui-dependency-installer/test/dependencies.test.js:20:12)
+    stack: |-
+      Error: The message "Unrecognised dependency: "dummy"." should start with "Unrecognised dependency:".
+          at Test.bound [as run] (/Users/ferdipr/Sources/csui-dependency-installer/node_modules/tape/lib/test.js:77:32)
+          at Immediate.next (/Users/ferdipr/Sources/csui-dependency-installer/node_modules/tape/lib/results.js:81:19)
+          at runCallback (timers.js:810:20)
+  ...
+
+1..1
+# tests 1
+# pass  0
+# fail  1
+
