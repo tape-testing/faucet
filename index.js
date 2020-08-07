@@ -1,7 +1,7 @@
 var through2 = require('through2');
 var duplexer = require('duplexer');
 var parser = require('tap-parser');
-var sprintf = require('sprintf');
+var sprintf = require('sprintf-js').sprintf;
 
 module.exports = function (opts) {
     if (!opts) opts = {};

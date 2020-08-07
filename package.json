@@ -11,7 +11,7 @@
     "duplexer": "^0.1.2",
     "minimist": "^1.2.6",
     "npm-which": "^1.0.2",
-    "sprintf": "^0.1.5",
+    "sprintf-js": "^1.1.2",
     "tap-parser": "^0.4.3",
     "tape": "^5.6.1",
     "through2": "^0.2.3"
