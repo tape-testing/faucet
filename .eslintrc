@@ -1,0 +1,32 @@
+{
+	"root": true,
+
+	"extends": "@ljharb",
+
+	"rules": {
+		"func-style": ["error", "declaration"],
+		"max-lines-per-function": "off",
+		"max-statements-per-line": ["error", { "max": 2 }],
+		"no-plusplus": "warn",
+		"sort-keys": "off",
+	},
+
+	"overrides": [
+		{
+			"files": "bin/**",
+			"env": {
+				"node": true,
+			},
+			"rules": {
+				"no-process-exit": "off",
+			}
+		},
+		{
+			"files": "example/**",
+			"rules": {
+				"no-magic-numbers": "off",
+				"no-plusplus": "off",
+			},
+		},
+	],
+}
