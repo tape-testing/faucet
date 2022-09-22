@@ -5,7 +5,11 @@ var duplexer = require('duplexer');
 var parser = require('tap-parser');
 var sprintf = require('sprintf-js').sprintf;
 var forEach = require('array.prototype.foreach');
+var join = require('array.prototype.join');
+var map = require('array.prototype.map');
 var push = require('array.prototype.push');
+var slice = require('array.prototype.slice');
+var split = require('string.prototype.split');
 var trim = require('string.prototype.trim');
 var regexTester = require('safe-regex-test');
 
@@ -19,7 +23,7 @@ module.exports = function (opts) {
 	function trimWidth(s, ok) {
 		if (opts && opts.width && s.length > opts.width - 2) {
 			var more = ok ? 0 : 4;
-			return s.slice(0, opts.width - 5 - more) + '...';
+			return slice(s, 0, opts.width - 5 - more) + '...';
 		}
 		return s;
 	}
@@ -86,9 +90,13 @@ module.exports = function (opts) {
 		if (!test || test.assertions.length === 0) { return; }
 		var last = test.assertions[test.assertions.length - 1];
 		if (!last.ok) {
-			push(out, extra.split('\n').map(function (line) {
-				return '  ' + line;
-			}).join('\n') + '\n');
+			push(out, join(
+				map(
+					split(extra, '\n'),
+					function (line) { return '  ' + line; }
+				),
+				'\n'
+			) + '\n');
 		}
 	});
 
