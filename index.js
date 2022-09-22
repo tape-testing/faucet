@@ -7,6 +7,10 @@ var sprintf = require('sprintf-js').sprintf;
 var forEach = require('array.prototype.foreach');
 var push = require('array.prototype.push');
 var trim = require('string.prototype.trim');
+var regexTester = require('safe-regex-test');
+
+var isPassing = regexTester(/^(tests|pass)\s+\d+$/);
+var isFailing = regexTester(/^fail\s+\d+$/);
 
 module.exports = function (opts) {
 	var tap = parser();
@@ -32,7 +36,7 @@ module.exports = function (opts) {
 			test
 			&& test.ok
 			&& test.assertions.length === 0
-			&& (/^(tests|pass)\s+\d+$/).test(test.name)
+			&& isPassing(test.name)
 		) {
 			push(out, '\r' + trimWidth(test.name));
 		} else if (test && test.ok) {
@@ -90,7 +94,7 @@ module.exports = function (opts) {
 	var dup = duplexer(tap, out);
 
 	tap.on('results', function (res) {
-		if (test && (/^fail\s+\d+$/).test(test.name)) {
+		if (test && isFailing(test.name)) {
 			push(out, updateName(test.offset + 1, '⨯ ' + test.name, 31));
 		} else if (test && test.ok) {
 			push(out, updateName(test.offset + 1, '✓ ' + test.name, 32));
@@ -104,7 +108,7 @@ module.exports = function (opts) {
 			));
 		});
 
-		if (!res.ok && !(/^fail\s+\d+$/).test(test && test.name)) {
+		if (!res.ok && !isFailing(test && test.name)) {
 			push(out, sprintf(
 				'\r\x1b[1m\x1b[31m⨯ fail  %s\x1b[0m\x1b[K\n',
 				(res.errors.length + res.fail.length) || ''

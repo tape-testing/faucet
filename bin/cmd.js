@@ -12,7 +12,8 @@ var spawn = require('child_process').spawn;
 var fs = require('fs');
 var path = require('path');
 
-function jsFile(x) { return (/\.js$/i).test(x); }
+var regexTester = require('safe-regex-test');
+var jsFile = regexTester(/\.js$/i);
 
 var argv = minimist(process.argv.slice(2));
 var tap = faucet({

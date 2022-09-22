@@ -17,6 +17,7 @@
 		"duplexer": "^0.1.2",
 		"minimist": "^1.2.6",
 		"npm-which": "^1.0.2",
+		"safe-regex-test": "^1.0.0",
 		"sprintf-js": "^1.1.2",
 		"string.prototype.trim": "^1.2.6",
 		"tap-parser": "^0.4.3",
