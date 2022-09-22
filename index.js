@@ -79,7 +79,9 @@ module.exports = function (opts) {
 			test.ok = false;
 		}
 		push(out, str);
-		push(test.assertions, res);
+		if (opts.stack) {
+			push(test.assertions, res);
+		}
 	});
 
 	tap.on('extra', function (extra) {
