@@ -3,6 +3,10 @@
 	"version": "0.0.1",
 	"description": "human-readable TAP summarizer",
 	"main": "index.js",
+	"exports": {
+		".": "./index.js",
+		"./package.json": "./package.json"
+	},
 	"bin": {
 		"faucet": "bin/cmd.js"
 	},
