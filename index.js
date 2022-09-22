@@ -43,10 +43,10 @@ module.exports = function (opts) {
 			&& test.assertions.length === 0
 			&& isPassing(test.name)
 		) {
-			push(out, '\r' + trimWidth(test.name));
+			out.push('\r' + trimWidth(test.name));
 		} else if (test && test.ok) {
 			var s = updateName(test.offset + 1, '✓ ' + test.name, 32);
-			push(out, '\r' + s);
+			out.push('\r' + s);
 		}
 
 		test = {
@@ -55,7 +55,7 @@ module.exports = function (opts) {
 			offset: 0,
 			ok: true
 		};
-		push(out, '\r' + trimWidth('# ' + comment) + '\x1b[K\n');
+		out.push('\r' + trimWidth('# ' + comment) + '\x1b[K\n');
 	});
 
 	tap.on('assert', function (res) {
@@ -64,7 +64,7 @@ module.exports = function (opts) {
 		if (!test) {
 			// mocha produces TAP results this way, whatever
 			var s = trimWidth(trim(res.name));
-			push(out, sprintf(
+			out.push(sprintf(
 				'\x1b[1m\x1b[' + c + 'm%s\x1b[0m\n',
 				trimWidth((res.ok ? '✓' : '⨯') + ' ' + s, res.ok)
 			));
@@ -82,7 +82,7 @@ module.exports = function (opts) {
 			}
 			test.ok = false;
 		}
-		push(out, str);
+		out.push(str);
 		push(test.assertions, res);
 	});
 
@@ -90,7 +90,7 @@ module.exports = function (opts) {
 		if (!test || test.assertions.length === 0) { return; }
 		var last = test.assertions[test.assertions.length - 1];
 		if (!last.ok) {
-			push(out, join(
+			out.push(join(
 				map(
 					split(extra, '\n'),
 					function (line) { return '  ' + line; }
@@ -104,13 +104,13 @@ module.exports = function (opts) {
 
 	tap.on('results', function (res) {
 		if (test && isFailing(test.name)) {
-			push(out, updateName(test.offset + 1, '⨯ ' + test.name, 31));
+			out.push(updateName(test.offset + 1, '⨯ ' + test.name, 31));
 		} else if (test && test.ok) {
-			push(out, updateName(test.offset + 1, '✓ ' + test.name, 32));
+			out.push(updateName(test.offset + 1, '✓ ' + test.name, 32));
 		}
 
 		forEach(res.errors, function (err, ix) {
-			push(out, sprintf(
+			out.push(sprintf(
 				'not ok \x1b[1m\x1b[31m%d\x1b[0m %s\n',
 				ix + 1 + res.asserts.length,
 				err.message
@@ -118,13 +118,13 @@ module.exports = function (opts) {
 		});
 
 		if (!res.ok && !isFailing(test && test.name)) {
-			push(out, sprintf(
+			out.push(sprintf(
 				'\r\x1b[1m\x1b[31m⨯ fail  %s\x1b[0m\x1b[K\n',
 				(res.errors.length + res.fail.length) || ''
 			));
 		}
 
-		push(out, null);
+		out.push(null);
 
 		dup.emit('results', res);
 		if (!res.ok) { dup.emit('fail'); }
