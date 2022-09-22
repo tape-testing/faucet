@@ -1,46 +1,46 @@
 {
-  "name": "faucet",
-  "version": "0.0.1",
-  "description": "human-readable TAP summarizer",
-  "main": "index.js",
-  "bin": {
-    "faucet": "bin/cmd.js"
-  },
-  "scripts": {
+	"name": "faucet",
+	"version": "0.0.1",
+	"description": "human-readable TAP summarizer",
+	"main": "index.js",
+	"bin": {
+		"faucet": "bin/cmd.js"
+	},
+	"scripts": {
 	"lint": "eslint --ext=js,mjs .",
 	"pretest": "npm run lint"
-  },
-  "dependencies": {
-    "defined": "^0.0.0",
-    "duplexer": "^0.1.2",
-    "minimist": "^1.2.6",
-    "npm-which": "^1.0.2",
-    "sprintf-js": "^1.1.2",
-    "tap-parser": "^0.4.3",
-    "tape": "^5.6.1",
-    "through2": "^0.2.3"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/substack/faucet.git"
-  },
-  "homepage": "https://github.com/substack/faucet",
-  "keywords": [
-    "tap",
-    "human",
-    "test",
-    "anything",
-    "protocol",
-    "pretty"
-  ],
-  "author": {
-    "name": "James Halliday",
-    "email": "mail@substack.net",
-    "url": "http://substack.net"
-  },
-  "license": "MIT",
-  "devDependencies": {
-    "@ljharb/eslint-config": "^21.0.0",
-    "eslint": "=8.8.0"
-  }
+	},
+	"dependencies": {
+		"defined": "^0.0.0",
+		"duplexer": "^0.1.2",
+		"minimist": "^1.2.6",
+		"npm-which": "^1.0.2",
+		"sprintf-js": "^1.1.2",
+		"tap-parser": "^0.4.3",
+		"tape": "^5.6.1",
+		"through2": "^0.2.3"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/substack/faucet.git"
+	},
+	"homepage": "https://github.com/substack/faucet",
+	"keywords": [
+		"tap",
+		"human",
+		"test",
+		"anything",
+		"protocol",
+		"pretty"
+	],
+	"author": {
+		"name": "James Halliday",
+		"email": "mail@substack.net",
+		"url": "http://substack.net"
+	},
+	"license": "MIT",
+	"devDependencies": {
+		"@ljharb/eslint-config": "^21.0.0",
+		"eslint": "=8.8.0"
+	}
 }
