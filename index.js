@@ -4,12 +4,15 @@ var through2 = require('through2');
 var duplexer = require('duplexer');
 var parser = require('tap-parser');
 var sprintf = require('sprintf-js').sprintf;
+var forEach = require('array.prototype.foreach');
+var push = require('array.prototype.push');
+var trim = require('string.prototype.trim');
 
 module.exports = function (opts) {
 	var tap = parser();
 	var out = through2();
 
-	function trim(s) {
+	function trimWidth(s) {
 		if (opts && opts.width && s.length > opts.width - 2) {
 			return s.slice(0, opts.width - 5) + '...';
 		}
@@ -17,7 +20,7 @@ module.exports = function (opts) {
 	}
 
 	function updateName(y, str, c) {
-		return '\x1b[' + y + 'A\x1b[1G\x1b[1m\x1b[' + c + 'm' + trim(str) + '\x1b[0m\x1b[' + y + 'B\x1b[1G';
+		return '\x1b[' + y + 'A\x1b[1G\x1b[1m\x1b[' + c + 'm' + trimWidth(str) + '\x1b[0m\x1b[' + y + 'B\x1b[1G';
 	}
 
 	var test;
@@ -31,10 +34,10 @@ module.exports = function (opts) {
 			&& test.assertions.length === 0
 			&& (/^(tests|pass)\s+\d+$/).test(test.name)
 		) {
-			out.push('\r' + trim(test.name));
+			push(out, '\r' + trimWidth(test.name));
 		} else if (test && test.ok) {
 			var s = updateName(test.offset + 1, '✓ ' + test.name, 32);
-			out.push('\r' + s);
+			push(out, '\r' + s);
 		}
 
 		test = {
@@ -43,7 +46,7 @@ module.exports = function (opts) {
 			offset: 0,
 			ok: true
 		};
-		out.push('\r' + trim('# ' + comment) + '\x1b[K\n');
+		push(out, '\r' + trimWidth('# ' + comment) + '\x1b[K\n');
 	});
 
 	tap.on('assert', function (res) {
@@ -51,10 +54,10 @@ module.exports = function (opts) {
 		var c = res.ok ? 32 : 31;
 		if (!test) {
 			// mocha produces TAP results this way, whatever
-			var s = trim(res.name.trim());
-			out.push(sprintf(
+			var s = trimWidth(trim(res.name));
+			push(out, sprintf(
 				'\x1b[1m\x1b[' + c + 'm%s\x1b[0m\n',
-				trim((res.ok ? '✓' : '⨯') + ' ' + s)
+				trimWidth((res.ok ? '✓' : '⨯') + ' ' + s)
 			));
 			return;
 		}
@@ -70,15 +73,15 @@ module.exports = function (opts) {
 			}
 			test.ok = false;
 		}
-		out.push(str);
-		test.assertions.push(res);
+		push(out, str);
+		push(test.assertions, res);
 	});
 
 	tap.on('extra', function (extra) {
 		if (!test || test.assertions.length === 0) { return; }
 		var last = test.assertions[test.assertions.length - 1];
 		if (!last.ok) {
-			out.push(extra.split('\n').map(function (line) {
+			push(out, extra.split('\n').map(function (line) {
 				return '  ' + line;
 			}).join('\n') + '\n');
 		}
@@ -88,13 +91,13 @@ module.exports = function (opts) {
 
 	tap.on('results', function (res) {
 		if (test && (/^fail\s+\d+$/).test(test.name)) {
-			out.push(updateName(test.offset + 1, '⨯ ' + test.name, 31));
+			push(out, updateName(test.offset + 1, '⨯ ' + test.name, 31));
 		} else if (test && test.ok) {
-			out.push(updateName(test.offset + 1, '✓ ' + test.name, 32));
+			push(out, updateName(test.offset + 1, '✓ ' + test.name, 32));
 		}
 
-		res.errors.forEach(function (err, ix) {
-			out.push(sprintf(
+		forEach(res.errors, function (err, ix) {
+			push(out, sprintf(
 				'not ok \x1b[1m\x1b[31m%d\x1b[0m %s\n',
 				ix + 1 + res.asserts.length,
 				err.message
@@ -102,13 +105,13 @@ module.exports = function (opts) {
 		});
 
 		if (!res.ok && !(/^fail\s+\d+$/).test(test && test.name)) {
-			out.push(sprintf(
+			push(out, sprintf(
 				'\r\x1b[1m\x1b[31m⨯ fail  %s\x1b[0m\x1b[K\n',
 				(res.errors.length + res.fail.length) || ''
 			));
 		}
 
-		out.push(null);
+		push(out, null);
 
 		dup.emit('results', res);
 		if (!res.ok) { dup.emit('fail'); }
