@@ -16,7 +16,8 @@
 		"lint": "eslint --ext=js,mjs .",
 		"pretest": "npm run lint",
 		"tests-only": "tape test/**/*.js | node bin/cmd",
-		"test": "npm run tests-only"
+		"test": "npm run tests-only",
+		"posttest": "aud --production"
 	},
 	"dependencies": {
 		"array.prototype.foreach": "^1.0.2",
@@ -60,6 +61,7 @@
 	"license": "MIT",
 	"devDependencies": {
 		"@ljharb/eslint-config": "^21.0.0",
+		"aud": "^2.0.1",
 		"eslint": "=8.8.0",
 		"npmignore": "^0.3.0"
 	},
