@@ -45,9 +45,9 @@ function checkFormatting(t, name, expectedExcerpt) {
 }
 
 test('A long successful assertion message should be cut.', function (t) {
-	checkFormatting(t, 'succeeded', 'should start with "Unrecogn...');
+	checkFormatting(t, 'succeeded', 'should start with "Unrecogn');
 });
 
 test('A long failed assertion message should be cut.', function (t) {
-	checkFormatting(t, 'failed', 'should start with "Unre...');
+	checkFormatting(t, 'failed', 'should start with "Unre');
 });
