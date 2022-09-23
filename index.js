@@ -72,7 +72,7 @@ module.exports = function (opts) {
 		}
 
 		var fmt = '\r  %s \x1b[1m\x1b[' + c + 'm%d\x1b[0m %s\x1b[K';
-		var str = sprintf(fmt, ok, res.number, res.name);
+		var str = sprintf(fmt, ok, res.id, res.name);
 
 		if (!res.ok) {
 			var y = ++test.offset + 1;

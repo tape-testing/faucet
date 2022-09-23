@@ -38,7 +38,7 @@
 		"sprintf-js": "^1.1.2",
 		"string.prototype.split": "^1.0.6",
 		"string.prototype.trim": "^1.2.6",
-		"tap-parser": "^0.4.3",
+		"tap-parser": "^5.4.0",
 		"tape": "^5.6.1",
 		"through2": "^0.2.3"
 	},
