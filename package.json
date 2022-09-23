@@ -29,7 +29,7 @@
 		"array.prototype.map": "^1.0.4",
 		"array.prototype.push": "^1.0.2",
 		"array.prototype.slice": "^1.0.0",
-		"defined": "^0.0.0",
+		"defined": "^1.0.0",
 		"duplexer": "^0.1.2",
 		"minimist": "^1.2.6",
 		"npm-which": "^1.0.2",
