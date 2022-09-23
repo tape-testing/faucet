@@ -1,7 +1,7 @@
 'use strict';
 
 var test = require('tape');
-var stream = require('stream');
+var Readable = require('readable-stream');
 var path = require('path');
 var fs = require('fs');
 var faucet = require('../..');
@@ -11,11 +11,14 @@ function createFormatter() {
 }
 
 function streamifyString(string) {
-	return new stream.Readable({
-		read: function () {
-			this.push(string);
-			this.push(null);
-		}
+	function read() {
+		/* eslint no-invalid-this: 0 */
+		this.push(string);
+		this.push(null);
+	}
+	return new Readable({
+		_read: read,
+		read: read
 	});
 }
 
