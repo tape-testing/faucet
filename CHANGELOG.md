@@ -5,6 +5,36 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.0.2](https://github.com/ljharb/faucet/compare/0.0.1...v0.0.2) - 2022-09-22
+
+### Merged
+
+- remove excess line [`#1`](https://github.com/ljharb/faucet/pull/1)
+
+### Commits
+
+- [eslint] add `npm run lint` [`4399c97`](https://github.com/ljharb/faucet/commit/4399c978f624e33d0020d347afefcb44ff1eb0da)
+- [meta] finish spaces -&gt; tabs [`8a62fc5`](https://github.com/ljharb/faucet/commit/8a62fc5496c999dd1d8d739a9f138a7b6febd8b2)
+- Trim too long assert messages to prevent line overflow [`f88d449`](https://github.com/ljharb/faucet/commit/f88d4498083fbb4bd0af8084a442da2a1548448e)
+- [actions] add reusable workflows [`51df79a`](https://github.com/ljharb/faucet/commit/51df79a00954855e6c0c5fbc1d463f289b995278)
+- [meta] add `auto-changelog` [`7a01dd6`](https://github.com/ljharb/faucet/commit/7a01dd6b5113712b18178b88719b79afaf67122c)
+- [Robustness] use `string.prototype.trim`, `array.prototype.foreach`, `array.prototype.push` [`edcea74`](https://github.com/ljharb/faucet/commit/edcea74078a6d1b5176105ac542b9881fbd5f722)
+- [meta] standardize license text [`0d4aa82`](https://github.com/ljharb/faucet/commit/0d4aa82331c46590e0745a4f4d305eb5e29bf4e7)
+- [Robustness] revert non-array `.push` changes from edcea74 [`7694712`](https://github.com/ljharb/faucet/commit/7694712bddb1628e7acbc8bb90a4e4934edf1cb8)
+- [Robustness] use `array.prototype.join`, `array.prototype.map`, `string.prototype.split`, `array.prototype.slice` [`555e2f6`](https://github.com/ljharb/faucet/commit/555e2f626d374d5777e57b1948bdc154449e7bcb)
+- [meta] add `sideEffects` flag, `funding`, `FUNDING.yml` [`a653c28`](https://github.com/ljharb/faucet/commit/a653c2808a05db0ea713d0cd27047cba7f9a4516)
+- [Robustness] use `safe-regex-test` [`418c79e`](https://github.com/ljharb/faucet/commit/418c79e9bb881db1c3d9e3896252bb89a98733fe)
+- [meta] use `npmignore` to autogenerate an npmignore file [`5b18ec4`](https://github.com/ljharb/faucet/commit/5b18ec4c48131a34b90f9e4cf0b0c76ad6e41690)
+- [Refactor] use `npm-which` to locate `tape` binary [`0a9bd16`](https://github.com/ljharb/faucet/commit/0a9bd163386078b9bcee9f815c4da69205ca2476)
+- [Deps] update `duplexer`, `sprintf`, `tap-parser` [`6a8765c`](https://github.com/ljharb/faucet/commit/6a8765c7176726edc8a0d9e0f26442f8fdc29a28)
+- [Deps] update `tape` [`f3ca01e`](https://github.com/ljharb/faucet/commit/f3ca01e0a707eb8b0fcfd91c1bfb13ac9a8fc815)
+- Only apps should have lockfiles [`d4559ca`](https://github.com/ljharb/faucet/commit/d4559ca1649f3707aefcb70a6d6bbce92bb0a12f)
+- [Fix] make tests pass [`90a49a2`](https://github.com/ljharb/faucet/commit/90a49a29e41748b8e405604aed096d1daca753c7)
+- [meta] add `safe-publish-latest` [`d5d2f41`](https://github.com/ljharb/faucet/commit/d5d2f41163902f637465f89bcfe3661e0f871d4c)
+- [breaking] add "exports" [`2f159b1`](https://github.com/ljharb/faucet/commit/2f159b1b9e97468c2b1fd7aa3b781c7bfe77f990)
+- [Refactor] use non-depreacted `sprintf-js` successor instead of `sprintf` [`1671ad5`](https://github.com/ljharb/faucet/commit/1671ad570c24f10232f56edb42f260c3ff30d84d)
+- [Deps] update `minimist` [`0994d21`](https://github.com/ljharb/faucet/commit/0994d2153726dbc587518fc86ff282ddabcc5dbe)
+
 ## [0.0.1](https://github.com/ljharb/faucet/compare/0.0.0...0.0.1) - 2014-02-17
 
 ### Commits
