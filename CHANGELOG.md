@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.0.4](https://github.com/ljharb/faucet/compare/v0.0.3...v0.0.4) - 2023-02-04
+
+### Commits
+
+- [Deps] update `array.prototype.foreach`, `array.prototype.join`, `array.prototype.map`, `array.prototype.push`, `array.prototype.slice`, `string.prototype.split`, `string.prototype.split`, `tape` [`84d8f72`](https://github.com/ljharb/faucet/commit/84d8f722901a469a2024a0d690c04a5fa2d62fa0)
+- [actions] update checkout action [`8e5332d`](https://github.com/ljharb/faucet/commit/8e5332dfe2f71d202019bfb311505eebaa67b868)
+- [Fix] downgrade `tap-parser` to v0.7.0 [`79c3ff2`](https://github.com/ljharb/faucet/commit/79c3ff21ba079c1505c59f3dd6ae6d40f956d84a)
+- [Dev Deps] update `@ljharb/eslint-config`, `aud` [`42d4d86`](https://github.com/ljharb/faucet/commit/42d4d8655ee330be6ab6f06c98253f9ce2d63f13)
+- [Deps] update `defined`, `minimist` [`5ea8305`](https://github.com/ljharb/faucet/commit/5ea83059497a14487e33506e283a18f8dc69da39)
+
 ## [v0.0.3](https://github.com/ljharb/faucet/compare/v0.0.2...v0.0.3) - 2022-09-22
 
 ### Commits
