@@ -24,11 +24,11 @@
 		"posttest": "aud --production"
 	},
 	"dependencies": {
-		"array.prototype.foreach": "^1.0.2",
-		"array.prototype.join": "^1.0.0",
-		"array.prototype.map": "^1.0.4",
-		"array.prototype.push": "^1.0.2",
-		"array.prototype.slice": "^1.0.0",
+		"array.prototype.foreach": "^1.0.4",
+		"array.prototype.join": "^1.0.1",
+		"array.prototype.map": "^1.0.5",
+		"array.prototype.push": "^1.0.3",
+		"array.prototype.slice": "^1.0.1",
 		"defined": "^1.0.1",
 		"duplexer": "^0.1.2",
 		"minimist": "^1.2.7",
@@ -36,10 +36,10 @@
 		"readable-stream": "^2.3.7",
 		"safe-regex-test": "^1.0.0",
 		"sprintf-js": "^1.1.2",
-		"string.prototype.split": "^1.0.6",
-		"string.prototype.trim": "^1.2.6",
+		"string.prototype.split": "^1.0.7",
+		"string.prototype.trim": "^1.2.7",
 		"tap-parser": "^5.4.0",
-		"tape": "^5.6.1",
+		"tape": "^5.6.3",
 		"through2": "^0.2.3"
 	},
 	"repository": {
