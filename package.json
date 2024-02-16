@@ -87,5 +87,8 @@
 			"images/",
 			"example/"
 		]
+	},
+	"engines": {
+		"node": ">= 0.10"
 	}
 }
