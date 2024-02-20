@@ -6,7 +6,8 @@ var faucet = require('../');
 var minimist = require('minimist');
 var defined = require('defined');
 var which = require('npm-which');
-var tapeCmd = which.sync('tape', { cwd: process.cwd() });
+
+var tapeCmd = process.env.FAUCET_TAP_CMD || which.sync('tape', { cwd: process.cwd() });
 
 var spawn = require('child_process').spawn;
 var fs = require('fs');
@@ -15,7 +16,17 @@ var path = require('path');
 var regexTester = require('safe-regex-test');
 var jsFile = regexTester(/\.js$/i);
 
-var argv = minimist(process.argv.slice(2));
+var faucetArgs = [];
+var opts = [];
+process.argv.slice(2).forEach(function(arg) {
+    if (arg !== '-' && arg[0] === '-') {
+        opts.push(arg);
+    } else {
+        faucetArgs.push(arg);
+    }
+});
+var argv = minimist(faucetArgs);
+
 var tap = faucet({
 	width: defined(argv.w, argv.width, process.stdout.isTTY
 		? process.stdout.columns - 5
@@ -59,7 +70,8 @@ if (files.length === 0) {
 	process.exit(1);
 }
 
-var tape = spawn(tapeCmd, files);
+var tapeArgs = opts.concat(files);
+var tape = spawn(tapeCmd, tapeArgs);
 tape.stderr.pipe(process.stderr);
 tape.stdout.pipe(tap).pipe(process.stdout);
 

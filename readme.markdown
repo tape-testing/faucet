@@ -135,9 +135,13 @@ Once you've got a way to get TAP out of your tests, just pipe into `faucet`:
 
 ```
 usage:
-  faucet [FILES]
+  faucet [OPTIONS] [FILES]
   command | faucet
 ```
+
+The command options and files arguments are both optional. Command options begin with `-` (dash). All other arguments are files.
+
+By default, `faucet` passes the command options and files to the `tape` executable found in the [`tape` module](https://github.com/substack/tape). The environment variable `FAUCET_TAP_CMD` may override this with a a path to a different TAP-producing command.
 
 # license
 
